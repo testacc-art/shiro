@@ -28,17 +28,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2.1.0
-        with:
-          java-version: 8
-          distribution: adopt-hotspot
+#       - name: Set up JDK
+#         uses: actions/setup-java@v2.1.0
+#         with:
+#           java-version: 8
+#           distribution: adopt-hotspot
 
-      - name: License Check
-        run: mvn apache-rat:check "-Drat.consoleOutput"
+#       - name: License Check
+#         run: mvn apache-rat:check "-Drat.consoleOutput"
 
-      - name: Build with Maven
-        run: mvn verify --errors --batch-mode --no-transfer-progress -Pdocs
+#       - name: Build with Maven
+#         run: mvn verify --errors --batch-mode --no-transfer-progress -Pdocs
 
   build-all:
     needs: build
