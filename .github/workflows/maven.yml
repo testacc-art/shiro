@@ -113,8 +113,11 @@ jobs:
         shell: pwsh
         run: |
           if($IsWindows) {
-            $toolPath = ${{ steps.setup-java.outputs.toolPath }}
-            $env:PATH = "C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.8.2\bin;$toolPath\bin"
+            echo "JAVA_HOME_PATH is $JAVA_HOME_PATH"
+            $JAVA_BIN_PATH = Join-Path $env:JAVA_HOME_PATH bin
+            $env:PATH = "C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.8.2\bin;$JAVA_BIN_PATH"
           }
           java -version
           mvn verify --errors --batch-mode --no-transfer-progress -Pdocs
+        env:
+          JAVA_HOME_PATH: ${{ steps.setup-java.outputs.toolPath }}
